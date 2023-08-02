@@ -56,9 +56,6 @@
   margin-right: auto;
   cursor: pointer;
   font-size: 11px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 127%;
   border: 1px solid var(--primary-fake-white);
 }
 
@@ -94,10 +91,9 @@
   }
 
   .button {
-    border: 0;
-
     &:hover {
-      border: 1px solid var(--primary-fake-white);
+      color: var(--primary-dark);
+      background-color: var(--primary-fake-white);
     }
   }
 }

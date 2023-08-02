@@ -7,15 +7,17 @@ export function Slider() {
   const currentTransform = -sliderPage * 100;
 
   return (
-    <article className={styles.slider}>
+    <article className={styles.slider} aria-label="slider">
       <ul
         style={{ transform: `translateX(${currentTransform}%)` }}
         className={styles.slides}
+        aria-label="slides"
       >
         {slides.map(({ image, title, description, link }, index) => (
-          <li key={index} className={styles.slide}>
+          <li key={index} className={styles.slide} aria-label="slide">
             {sliderPage !== 0 && (
               <button
+                aria-label="previous slide"
                 className={`${styles.arrow} ${styles.arrowLeft}`}
                 onClick={() => setSliderPage((prev) => prev - 1)}
               />
@@ -29,11 +31,12 @@ export function Slider() {
                 </a>
               </div>
             </div>
-            <div className={styles.slideImage}>
+            <figure className={styles.slideImage}>
               <img src={image} alt="slide image" />
-            </div>
+            </figure>
             {sliderPage + 1 !== slides.length && (
               <button
+                aria-label="next slide"
                 className={`${styles.arrow} ${styles.arrowRight}`}
                 onClick={() => setSliderPage((prev) => prev + 1)}
               />
@@ -41,18 +44,20 @@ export function Slider() {
           </li>
         ))}
       </ul>
-      <div className={styles.pagination}>
+      <div className={styles.pagination} aria-label="pagination">
         {sliderPage !== 0 && (
           <button
+            aria-label="previous slide"
             className={`${styles.arrow} ${styles.arrowLeft}`}
             onClick={() => setSliderPage((prev) => prev - 1)}
           />
         )}
-        <span className={styles.paginationNumbers}>
+        <span className={styles.paginationNumbers} aria-label="number of slide">
           {sliderPage + 1} / {slides.length}
         </span>
         {sliderPage + 1 !== slides.length && (
           <button
+            aria-label="next slide"
             className={`${styles.arrow} ${styles.arrowRight}`}
             onClick={() => setSliderPage((prev) => prev + 1)}
           />

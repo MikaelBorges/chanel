@@ -59,7 +59,8 @@ export default function App() {
           </p>
         </article>
 
-        <picture
+        <figure
+          aria-label="image with parallax effect"
           style={{ height: heightParallaxContainer }}
           className={styles.parallaxContainer}
           ref={ref1}
@@ -82,7 +83,7 @@ export default function App() {
             src={giedreDesktop}
             alt="giedre desktop"
           />
-        </picture>
+        </figure>
 
         <Slider />
 
@@ -92,7 +93,8 @@ export default function App() {
           </a>
         </article>
 
-        <picture
+        <figure
+          aria-label="image with parallax effect"
           style={{ height: heightParallaxContainer }}
           className={styles.parallaxContainer}
           ref={ref2}
@@ -115,7 +117,7 @@ export default function App() {
             src={imariDesktop}
             alt="imari desktop"
           />
-        </picture>
+        </figure>
 
         <article className={styles.miniSection}>
           <h2 className="title titleLevel2">
@@ -130,7 +132,9 @@ export default function App() {
         </article>
 
         <footer className={styles.footer}>
-          <p className={styles.disclaimer}>*Destination lune</p>
+          <p className={styles.disclaimer} aria-label="disclaimer">
+            *Destination lune
+          </p>
         </footer>
       </section>
     </>
