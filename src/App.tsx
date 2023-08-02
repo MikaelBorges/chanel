@@ -4,15 +4,14 @@ import giedreDesktop from "./assets/images/giedre.jpg";
 import imariMobile from "./assets/images/imari-mobile.jpg";
 import imariDesktop from "./assets/images/imari.jpg";
 import { useState, useEffect, useRef } from "react";
-import { slides } from "./data/slides";
 import { useOnScreen } from "./hooks/useOnScreen";
 import styles from "./App.module.scss";
+import { Slider } from "./components/Slider";
 
 export default function App() {
   const [bottomRef1, setBottomRef1] = useState(0);
   const [bottomRef2, setBottomRef2] = useState(0);
   const [heightParallaxContainer, setHeightParallaxContainer] = useState("");
-  const [sliderPage, setSliderPage] = useState(0);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
 
@@ -32,8 +31,6 @@ export default function App() {
   if (isInViewport2) window.addEventListener("scroll", handleScroll2);
   else window.removeEventListener("scroll", handleScroll2);
 
-  const currentTransform = -sliderPage * 100;
-
   useEffect(() => {
     const image = ref1.current.children[0];
     image.onload = () =>
@@ -50,21 +47,19 @@ export default function App() {
   return (
     <>
       <section className={styles.heroSection}>
-        <img className={styles.heroImage} src={hero} alt="hero" />
+        <img className={styles.heroImage} src={hero} alt="hero section" />
         <p className={styles.heroTitle}>go to the moon</p>
       </section>
 
       <section className={styles.mainSection}>
-        <div className={styles.titleBlock}>
-          <h1 className={`${styles.title} ${styles.titleLevel1}`}>
-            over the moon*
-          </h1>
-          <p className={styles.description}>
+        <article className={styles.titleBlock}>
+          <h1 className="title titleLevel1">over the moon*</h1>
+          <p className="description">
             Quatre inconnus se rencontrent dans un ascenseur pour la Lune.
           </p>
-        </div>
+        </article>
 
-        <div
+        <picture
           style={{ height: heightParallaxContainer }}
           className={styles.parallaxContainer}
           ref={ref1}
@@ -87,70 +82,17 @@ export default function App() {
             src={giedreDesktop}
             alt="giedre desktop"
           />
-        </div>
+        </picture>
 
-        <div className={styles.slider}>
-          <div
-            style={{ transform: `translateX(${currentTransform}%)` }}
-            className={styles.slides}
-          >
-            {slides.map(({ image, title, description, link }, index) => (
-              <div key={index} className={styles.slide}>
-                {sliderPage !== 0 && (
-                  <button
-                    className={`${styles.arrow} ${styles.arrowLeft}`}
-                    onClick={() => setSliderPage((prev) => prev - 1)}
-                  />
-                )}
-                <div className={styles.slideText}>
-                  <div className={styles.slideTextSubcontainer}>
-                    <h2 className={`${styles.title} ${styles.titleLevel2}`}>
-                      {title}
-                    </h2>
-                    <p className={styles.description}>{description}</p>
-                    <a href={link.url} className={styles.link}>
-                      {link.text}
-                    </a>
-                  </div>
-                </div>
-                <div className={styles.slideImage}>
-                  <img src={image} alt="slider1" />
-                </div>
-                {sliderPage + 1 !== slides.length && (
-                  <button
-                    className={`${styles.arrow} ${styles.arrowRight}`}
-                    onClick={() => setSliderPage((prev) => prev + 1)}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-          <div className={styles.pagination}>
-            {sliderPage !== 0 && (
-              <button
-                className={`${styles.arrow} ${styles.arrowLeft}`}
-                onClick={() => setSliderPage((prev) => prev - 1)}
-              />
-            )}
-            <span className={styles.paginationNumbers}>
-              {sliderPage + 1} / {slides.length}
-            </span>
-            {sliderPage + 1 !== slides.length && (
-              <button
-                className={`${styles.arrow} ${styles.arrowRight}`}
-                onClick={() => setSliderPage((prev) => prev + 1)}
-              />
-            )}
-          </div>
-        </div>
+        <Slider />
 
-        <div className={styles.miniSection}>
+        <article className={styles.miniSection}>
           <a href="#" className={styles.button}>
             découvrir la collection
           </a>
-        </div>
+        </article>
 
-        <div
+        <picture
           style={{ height: heightParallaxContainer }}
           className={styles.parallaxContainer}
           ref={ref2}
@@ -173,19 +115,19 @@ export default function App() {
             src={imariDesktop}
             alt="imari desktop"
           />
-        </div>
+        </picture>
 
-        <div className={styles.miniSection}>
-          <h2 className={`${styles.title} ${styles.titleLevel2}`}>
+        <article className={styles.miniSection}>
+          <h2 className="title titleLevel2">
             Découvrir les pièces en boutique
           </h2>
-          <p className={styles.description}>
+          <p className="description">
             Découvrez les nouvelles pièces dans votre boutique CHANEL.
           </p>
           <a href="#" className={styles.button}>
             Trouvez votre boutique
           </a>
-        </div>
+        </article>
 
         <footer className={styles.footer}>
           <p className={styles.disclaimer}>*Destination lune</p>
